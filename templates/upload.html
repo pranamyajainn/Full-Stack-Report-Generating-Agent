@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Report Generator</title>
+    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Essay.svg/20px-Essay.svg.png" type="image/png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #fff;
+            overflow: hidden;
+        }
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, #4caf50, #81c784, #ffcc80, #ff7043, #4caf50);
+            background-size: 300% 300%;
+            animation: gradientMove 12s infinite linear;
+            z-index: -1;
+        }
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        header {
+            text-align: center;
+            margin-top: 50px;
+        }
+        header h1 { font-size: 2.5rem; font-weight: bold; }
+        header p { font-size: 1.2rem; margin-top: 10px; }
+        .form-container {
+            margin-top: 100px;
+            padding: 20px;
+            width: 60%;
+            max-width: 600px;
+            margin: 100px auto;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        textarea, input[type="file"], select, button {
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        input[type="file"], select {
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            cursor: pointer;
+        }
+        button {
+            background: #ff7043;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        button:hover { background: #ff5722; }
+    </style>
+    <script>
+        async function previewReport() {
+            const form = document.querySelector('form');
+            const formData = new FormData(form);
+
+            try {
+                const response = await fetch('/preview', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+                if (response.ok) {
+                    window.open(data.preview_url, '_blank');
+                } else {
+                    alert(data.error || 'An error occurred while generating the preview');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An unexpected error occurred while generating the preview');
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Full Stack AI Report Generating Agent!</h1>
+        <p>Select a report type and generate a professional report, powered by Llama Index.</p>
+    </header>
+    <div class="form-container">
+        <form enctype="multipart/form-data">
+            <textarea name="prompt" rows="4" placeholder="Enter your prompt here..." required></textarea>
+            <input type="file" name="files" multiple required>
+            <select name="report_type" required>
+                <option value="general">General Report</option>
+                <option value="financial">Financial Report</option>
+                <option value="stock">Stock Report</option>
+                <option value="student_exam">Student Exam Report</option>
+                <option value="research">Research Report</option>
+                <option value="crime">Crime Report</option>
+            </select>
+
+            <button type="button" onclick="previewReport()">Generate Report</button>
+        </form>
+    </div>
+</body>
+</html>
