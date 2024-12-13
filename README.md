@@ -1,9 +1,3 @@
-NOTE:
----------------
-Due to some mishaps while upload our code for Deployement for now our OpenAI API Key has been depleted (which is why you maynot get the correct response to your query), hence we're facing: 
-Error in Llama Index retrieval: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-proj-********************************************************************************************************************************************************OTsA. 
-Kindly provide us some time till we get it back and add to proper functionality. 
---------------
 
 
 FULL STACK REPORT GENERATING AGENT.
