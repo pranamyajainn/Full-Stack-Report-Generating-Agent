@@ -97,13 +97,15 @@ def retrieve_relevant_chunks(prompt, report_type, file_content):
         documents = SimpleDirectoryReader(temp_dir).load_data()
         index = VectorStoreIndex.from_documents(documents)
         query_engine = index.as_query_engine()
-
+        
         # Predefined system prompts
         system_prompts = {
-            "financial": "Provide a professional financial analysis.",
-            "stock": "Generate a professional stock market analysis.",
-            "research": "Conduct a structured, professional research analysis.",
-            "general": "Provide a comprehensive and professional summary."
+        "general": "You are a general-purpose report generator. Your job is to generate structured, professional reports.",
+        "financial": "You are a high professional financial report generator. Your job is to generate structured, professional financial reports.",
+        "stock": "You are a high professional stock report generator. Your job is to generate structured, professional stock reports.",
+        "student_exam": "You are a high professional student exam report generator. Your job is to generate structured, professional student exam reports.",
+        "research": "You are a high professional research report generator. Your job is to generate structured, professional research reports.",
+        "crime": "You are a high professional crime report generator. Your job is to generate structured, professional crime reports."
         }
         full_query = f"{system_prompts.get(report_type, 'Provide a comprehensive and professional summary.')}\n\n{prompt}"
         response = query_engine.query(full_query)
