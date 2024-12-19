@@ -12,7 +12,7 @@ This project is a full-stack application that generates dynamic reports from str
 
 --------------------------------------------------------------
 
-New updates after Video explaination :
+New updates after Video explanation :
 
 1. Additional support of jpeg, jpg and png files
 
@@ -26,6 +26,6 @@ New updates after Video explaination :
 
 6. New and better Report format
 
-7. Added visulizations 
+7. Transition from Groq api to OpenAI api key 
 
 8. RAG implementation
