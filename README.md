@@ -1,4 +1,3 @@
-Temporary locally hosted product link: https://1a28-106-51-8-242.ngrok-free.app/
 
 
 
